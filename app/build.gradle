@@ -1,0 +1,161 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "software.ehsan.newsfeed"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+
+        debug {
+            buildConfigField "String", "API_BASE_URL", "\"https://newsapi.org/v2/\""
+            buildConfigField "String", "API_KEY", "\"4f41f8d4da8a41fd83a60e72724afa3c\""
+            resValue "string", "app_version", "${defaultConfig.versionName}"
+        }
+        release {
+            buildConfigField "String", "API_BASE_URL", "\"https://newsapi.org/v2/\""
+            buildConfigField "String", "API_KEY", "\"4f41f8d4da8a41fd83a60e72724afa3c\""
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "app_version", "${defaultConfig.versionName}"
+        }
+        benchmark {
+            initWith buildTypes.release
+            signingConfig signingConfigs.debug
+            matchingFallbacks = ['release']
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.2"
+    }
+    namespace 'software.ehsan.newsfeed'
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+
+    //Constraint Layout
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    //Material
+    implementation 'com.google.android.material:material:1.7.0'
+
+    //Retrofit (REST client)
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //Retrofit (Moshi Adapter)
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+    //Interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
+
+
+    //Moshi (JSON library)
+    implementation "com.squareup.moshi:moshi:1.14.0"
+    implementation 'androidx.compose.ui:ui:1.3.2'
+    implementation 'androidx.compose.material:material:1.3.1'
+    implementation 'androidx.compose.ui:ui-tooling-preview:1.3.2'
+    debugImplementation 'androidx.compose.ui:ui-tooling:1.3.2'
+
+    //Moshi Codegen (generate code instead of reflection for better efficiency)
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
+
+    //HILT (DI)
+    kapt 'com.google.dagger:hilt-compiler:2.44'
+    implementation 'com.google.dagger:hilt-android:2.44'
+
+    //Coroutines (Concurrency)
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    //Lifecycles
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha03"
+
+    // LiveData Extensions
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+
+    //Activity
+    implementation "androidx.activity:activity-ktx:1.6.1"
+
+    //Navigation Component
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+
+    //Custom chrome
+    implementation 'androidx.browser:browser:1.4.0'
+    implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
+
+    //Glide (Loading images)
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+
+    //Time utility
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
+
+    //Firebase analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.2'
+    implementation 'com.google.firebase:firebase-perf-ktx:20.3.0'
+
+    //Below should be removed!
+    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+
+    //Compose
+    implementation 'androidx.compose.runtime:runtime-livedata:1.4.0-alpha03'
+    implementation "androidx.compose.material:material-icons-extended:1.3.1"
+
+    //Preference
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+
+    //Showing loading state
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //Paging for loading data with pagination
+    implementation "androidx.paging:paging-runtime:3.1.1"
+
+    //Logger
+    implementation 'com.orhanobut:logger:2.2.0'
+
+    //Leakcanary for detecting memory leaks
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+
+    //JUnit (Unit Test)
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+
+    //Espresso (UI Test)
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation "androidx.profileinstaller:profileinstaller:1.3.0-alpha02"
+
+}

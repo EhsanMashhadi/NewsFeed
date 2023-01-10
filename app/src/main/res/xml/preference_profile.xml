@@ -1,0 +1,61 @@
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:key="account_category"
+        app:title="Account">
+
+        <Preference
+            app:icon="@drawable/ic_profile"
+            app:key="login_register"
+            app:title="Login/Register" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="settings_category"
+        app:title="Settings">
+
+        <ListPreference
+            android:summary="%s"
+            app:entries="@array/font_size"
+            app:entryValues="@array/font_size"
+            app:icon="@drawable/ic_font_size"
+            app:defaultValue="Medium"
+            app:key="font_size"
+            app:title="Font Size" />
+
+        <ListPreference
+            android:summary="%s"
+            app:entries="@array/theme"
+            app:entryValues="@array/theme"
+            app:icon="@drawable/ic_theme"
+            app:defaultValue="Night"
+            app:key="theme"
+            app:title="Theme" />
+
+        <ListPreference
+            android:summary="%s"
+            app:entries="@array/country"
+            app:entryValues="@array/country_values"
+            app:icon="@drawable/ic_country"
+            app:defaultValue="ca"
+            app:key="country"
+            app:title="Country" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="help_category"
+        app:title="Help">
+
+        <Preference
+            app:icon="@drawable/ic_version"
+            app:key="version"
+            app:selectable="false"
+            app:summary="@string/app_version"
+            app:title="Version" />
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView_articleRowItem_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/article_imageSize"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@color/article_shimmer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_articleRowItem_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:background="@color/article_shimmer"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView_articleRowItem_image"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/textView_articleRowItem_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:background="@color/article_shimmer"
+        app:layout_constraintEnd_toEndOf="@id/textView_articleRowItem_title"
+        app:layout_constraintStart_toStartOf="@id/textView_articleRowItem_title"
+        app:layout_constraintTop_toBottomOf="@id/textView_articleRowItem_title"
+        tools:text="Description" />
+
+
+    <TextView
+        android:id="@+id/textView_articleRowItem_source"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:background="@color/article_shimmer"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textView_articleRowItem_description"
+        app:layout_constraintTop_toBottomOf="@+id/textView_articleRowItem_description"
+        tools:text="Source" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

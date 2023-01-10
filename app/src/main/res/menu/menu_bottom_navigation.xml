@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/articlesFragment"
+        android:title="@string/bottomNavigation_forYou"
+        android:icon="@drawable/ic_dashboard" />
+    <item android:id="@+id/headlinesFragment"
+        android:title="@string/bottomNavigation_headlines"
+        android:icon="@drawable/ic_headlines" />
+    <item android:id="@+id/savedArticlesFragment"
+        android:title="@string/bottomNavigation_saved"
+        android:icon="@drawable/ic_save_filled" />
+</menu>

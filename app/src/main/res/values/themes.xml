@@ -1,0 +1,78 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="toolbarStyle">@style/Widget.AppCompat.Toolbar</item>
+    </style>
+
+    <!-- Application day theme. -->
+    <style name="Theme.NewsFeed" parent="Theme.BaseTheme">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/pink_600</item>
+        <item name="colorSecondaryVariant">@color/pink_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="RoundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">7%</item>
+    </style>
+
+    <style name="Headline6Small" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Headline6Medium" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Headline6Large" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Headline6ExtraLarge" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Body1Small" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Body1Medium" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Body1Large" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Body1ExtraLarge" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="SmallTheme" parent="Theme.NewsFeed">
+        <item name="textAppearanceHeadline6">@style/Headline6Small</item>
+        <item name="textAppearanceBody1">@style/Body1Small</item>
+    </style>
+
+    <style name="MediumTheme" parent="Theme.NewsFeed">
+        <item name="textAppearanceHeadline6">@style/Headline6Medium</item>
+        <item name="textAppearanceBody1">@style/Body1Medium</item>
+    </style>
+
+    <style name="LargeTheme" parent="Theme.NewsFeed">
+        <item name="textAppearanceHeadline6">@style/Headline6Large</item>
+        <item name="textAppearanceBody1">@style/Body1Large</item>
+    </style>
+
+    <style name="ExtraLargeTheme" parent="Theme.NewsFeed">
+        <item name="textAppearanceHeadline6">@style/Headline6ExtraLarge</item>
+        <item name="textAppearanceBody1">@style/Body1ExtraLarge</item>
+    </style>
+
+</resources>

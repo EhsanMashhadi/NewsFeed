@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/articlesFragment">
+    <fragment
+        android:id="@+id/articlesFragment"
+        android:name="software.ehsan.newsfeed.ui.dashboard.ArticlesFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_articles">
+        <argument
+            android:name="query"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/headlinesFragment"
+        android:name="software.ehsan.newsfeed.ui.headlines.HeadlinesFragment"
+        android:label="Headlines"
+        tools:layout="@layout/fragment_headlines" />
+    <fragment
+        android:id="@+id/savedArticlesFragment"
+        android:name="software.ehsan.newsfeed.ui.saved.SavedArticlesFragment"
+        tools:layout="@layout/fragment_article_saved"
+        android:label="Saved News" />
+    <fragment
+        android:id="@+id/searchArticleFragment"
+        android:name="software.ehsan.newsfeed.ui.search.SearchArticleFragment"
+        tools:layout="@layout/fragment_article_search"
+        android:label="Results">
+        <argument
+            android:name="query"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_searchArticleFragment"
+        app:destination="@id/searchArticleFragment"
+        app:popUpTo="@id/searchArticleFragment"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="software.ehsan.newsfeed.ui.profile.ProfileFragment"
+        android:label="Profile">
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:popUpTo="@id/profileFragment"
+        app:destination="@id/profileFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        tools:layout="@layout/fragment_login"
+        android:name="software.ehsan.newsfeed.ui.login.LoginFragment"
+        android:label="Login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="software.ehsan.newsfeed.ui.signup.SignupFragment"
+        tools:layout="@layout/fragment_signup"
+        android:label="Signup" />
+</navigation>

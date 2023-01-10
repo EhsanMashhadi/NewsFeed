@@ -1,0 +1,187 @@
+<resources>
+    <string name="app_name">NewsFeed</string>
+
+    <string-array name="tabLayout_headlines">
+        <item>Business</item>
+        <item>Entertainment</item>
+        <item>General</item>
+        <item>Health</item>
+        <item>Science</item>
+        <item>Sport</item>
+        <item>Tech</item>
+    </string-array>
+
+    <!-- BOTTOM NAVIGATION -->
+    <string name="bottomNavigation_forYou">4U</string>
+    <string name="bottomNavigation_headlines">Headlines</string>
+    <string name="bottomNavigation_saved">Saved</string>
+
+    <!-- MAIN TOOLBAR -->
+    <string name="mainToolbar_search">Search</string>
+    <string name="mainToolbar_profile">Profile</string>
+
+    <!--  Articles -->
+    <string name="articlesFragment_unauthorizedMessage">You should login to save articles</string>
+
+    <!-- PROFILE -->
+    <string name="profileFragment_logOut">Log Out</string>
+    <string name="profileFragment_logOutMessage">Are you sure?You can\'t save news until you log in again.</string>
+    <string name="profileFragment_loginRegister">Login/Register</string>
+
+    <!-- LOGIN -->
+    <string name="loginFragment_login">Login</string>
+    <string name="loginFragment_singUp">Create a new account?</string>
+    <string name="loginFragment_wrongEmailFormat">Wrong email format</string>
+    <string name="loginFragment_wrongPassword">Wrong email/password</string>
+    <string name="loginFragment_successMessage">Login successfully</string>
+
+    <!-- SIGN UP -->
+    <string name="singUpFragment_signUp">Sing Up</string>
+    <string name="singUpFragment_failedMessage">Failed to create an account</string>
+    <string name="singUpFragment_successMessage">Account created successfully</string>
+
+    <!-- SAVED ARTICLES -->
+    <string name="savedArticlesFragment_noArticle">No saved Article</string>
+
+    <!-- COMMON (ALL) -->
+    <string name="all_genericError">Error, please try again later.</string>
+    <string name="all_email">Email</string>
+    <string name="all_password">Password</string>
+    <string name="all_cancel">Cancel</string>
+    <string name="all_savedSuccessfully">Saved successfully!</string>
+    <string name="all_unsavedSuccessfully">Removed from saved items!</string>
+    <string name="all_savedError">Failed to save article!</string>
+    <string name="all_internetError">No Internet connection!</string>
+    <string name="all_rateLimitError">Rate limit error</string>
+    <string name="all_shouldLogin">You should login to see the saved list</string>
+
+
+    <!-- SETTINGS -->
+    <string-array name="font_size">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>XLarge</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item>Day</item>
+        <item>Night</item>
+        <item>System Mode</item>
+    </string-array>
+
+    <string-array name="country">
+        <item>Argentina</item>
+        <item>Australia</item>
+        <item>Austria</item>
+        <item>Belgium</item>
+        <item>Brazil</item>
+        <item>Bulgaria</item>
+        <item>Canada</item>
+        <item>China</item>
+        <item>Colombia</item>
+        <item>Cuba</item>
+        <item>Czech Republic</item>
+        <item>Egypt</item>
+        <item>France</item>
+        <item>Germany</item>
+        <item>Greece</item>
+        <item>Hong Kong</item>
+        <item>Hungary</item>
+        <item>India</item>
+        <item>Indonesia</item>
+        <item>Ireland</item>
+        <item>Israel</item>
+        <item>Italy</item>
+        <item>Japan</item>
+        <item>Latvia</item>
+        <item>Lithuania</item>
+        <item>Malaysia</item>
+        <item>Mexico</item>
+        <item>Morocco</item>
+        <item>Netherlands</item>
+        <item>New Zealand</item>
+        <item>Nigeria</item>
+        <item>Norway</item>
+        <item>Philippines</item>
+        <item>Poland</item>
+        <item>Portugal</item>
+        <item>Romania</item>
+        <item>Russia</item>
+        <item>Saudi Arabia</item>
+        <item>Serbia</item>
+        <item>Singapore</item>
+        <item>Slovakia</item>
+        <item>Slovenia</item>
+        <item>South Africa</item>
+        <item>South Korea</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>Taiwan</item>
+        <item>Thailand</item>
+        <item>Turkey</item>
+        <item>UAE</item>
+        <item>Ukraine</item>
+        <item>United Kingdom</item>
+        <item>United States</item>
+        <item>Venezuela</item>
+    </string-array>
+
+    <string-array name="country_values">
+        <item>ar</item>
+        <item>au</item>
+        <item>at</item>
+        <item>be</item>
+        <item>br</item>
+        <item>bg</item>
+        <item>ca</item>
+        <item>cn</item>
+        <item>co</item>
+        <item>cu</item>
+        <item>cz</item>
+        <item>eg</item>
+        <item>fr</item>
+        <item>de</item>
+        <item>gr</item>
+        <item>hk</item>
+        <item>hu</item>
+        <item>in</item>
+        <item>id</item>
+        <item>ie</item>
+        <item>il</item>
+        <item>it</item>
+        <item>jp</item>
+        <item>lv</item>
+        <item>lt</item>
+        <item>my</item>
+        <item>mx</item>
+        <item>ma</item>
+        <item>nl</item>
+        <item>nz</item>
+        <item>ng</item>
+        <item>no</item>
+        <item>ph</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>sa</item>
+        <item>rs</item>
+        <item>sg</item>
+        <item>sk</item>
+        <item>si</item>
+        <item>za</item>
+        <item>kr</item>
+        <item>se</item>
+        <item>ch</item>
+        <item>tw</item>
+        <item>th</item>
+        <item>tr</item>
+        <item>ae</item>
+        <item>ua</item>
+        <item>gb</item>
+        <item>us</item>
+        <item>ve</item>
+    </string-array>
+
+</resources>
