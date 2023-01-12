@@ -4,6 +4,8 @@ NewsFeed is a sample Android (100% Kotlin :hearts:) application with MVVM archit
 development tools including but not limited to Hilt, Coroutines, Flow, Paging, Navigation, LiveData,
 and Compose.
 
+![screenshots-3](https://user-images.githubusercontent.com/6213824/212164694-56757204-a8c3-41e6-847e-3630db82d1ea.jpg)
+
 
 ## Download
 
