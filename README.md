@@ -43,3 +43,9 @@ NewsFeed uses [NewsAPI](https://newsapi.org) which locates articles and news hea
 sources across the web by providing JSON API. 
 
 You can get your own API key (free for developers) and put it in the `API_KEY` section of the `build.gradle` file.
+
+## Did you find this repo helpful?
+I hope it is!
+* Don't forget to star :star: the repo.
+* Follow [me](https://github.com/EhsanMashhadi) on Github for more upcoming repo
+* You can also buy me a coffee! <a href="https://www.buymeacoffee.com/ehsanmashhadi" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
