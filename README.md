@@ -37,6 +37,11 @@ TBD
 * [Logger](https://github.com/orhanobut/logger)
 * [Benchmark](https://developer.android.com/topic/performance/benchmarking/benchmarking-overview): Macro benchmarking of the app startup
 
+
+## Architecture
+<img src="https://user-images.githubusercontent.com/6213824/212432642-e0fbd1c4-07b6-4b6c-8421-079cf479dcfe.jpeg" alt="drawing" width="500"/>
+
+
 ## NewsAPI
 
 NewsFeed uses [NewsAPI](https://newsapi.org) which locates articles and news headlines from various
