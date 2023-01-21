@@ -27,6 +27,7 @@
     <string name="profileFragment_logOut">Log Out</string>
     <string name="profileFragment_logOutMessage">Are you sure?You can\'t save news until you log in again.</string>
     <string name="profileFragment_loginRegister">Login/Register</string>
+    <string name="profileFragment_notVerified">Not verified, please check you email.</string>
 
     <!-- LOGIN -->
     <string name="loginFragment_login">Login</string>
@@ -37,6 +38,7 @@
 
     <!-- SIGN UP -->
     <string name="singUpFragment_signUp">Sing Up</string>
+    <string name="signUpFragment_duplicateAccount">There is an account with this email already</string>
     <string name="singUpFragment_failedMessage">Failed to create an account</string>
     <string name="singUpFragment_successMessage">Account created successfully</string>
 
@@ -54,6 +56,7 @@
     <string name="all_internetError">No Internet connection!</string>
     <string name="all_rateLimitError">Rate limit error</string>
     <string name="all_shouldLogin">You should login to see the saved list</string>
+    <string name="all_empty"></string>
 
 
     <!-- SETTINGS -->

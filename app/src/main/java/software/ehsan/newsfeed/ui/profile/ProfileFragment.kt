@@ -142,11 +142,18 @@ class ProfileFragment : BasePreferenceFragment() {
 
     private fun showUserInformationView(user: User) {
         loginRegisterPreference.title = user.email
+        if(!user.isEmailVerified){
+            loginRegisterPreference.summary = getString(R.string.profileFragment_notVerified)
+        }
+        else{
+            loginRegisterPreference.summary = getString(R.string.all_empty)
+        }
         loginRegisterPreference.isEnabled = false
     }
 
     private fun showLoginView() {
         loginRegisterPreference.title = getString(R.string.profileFragment_loginRegister)
+        loginRegisterPreference.summary = getString(R.string.all_empty)
         loginRegisterPreference.isEnabled = true
     }
 
