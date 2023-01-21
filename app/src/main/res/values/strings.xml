@@ -71,7 +71,7 @@
     <string-array name="theme">
         <item>Day</item>
         <item>Night</item>
-        <item>System Mode</item>
+        <item>Automatic (Follow device theme)</item>
     </string-array>
 
     <string-array name="country">

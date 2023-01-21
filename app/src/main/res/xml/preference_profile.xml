@@ -30,7 +30,7 @@
             app:entries="@array/theme"
             app:entryValues="@array/theme"
             app:icon="@drawable/ic_theme"
-            app:defaultValue="Night"
+            app:defaultValue="Automatic (Follow device theme)"
             app:key="theme"
             app:title="Theme" />
 
