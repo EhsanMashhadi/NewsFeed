@@ -12,6 +12,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import software.ehsan.newsfeed.data.model.Article
+import software.ehsan.newsfeed.data.model.Feedback
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -69,4 +70,10 @@ class FirebaseRealTimeDatabase @Inject constructor(private val firebaseDatabase:
                 continuation.resumeWithException(it)
             }
         }
+
+    fun insertFeedback(feedback: Feedback):Task<Void>{
+        val key = firebaseDatabase.getReference("feedback").push().key
+        val myRef = firebaseDatabase.getReference("feedback/${key}")
+        return myRef.setValue(feedback)
+    }
 }
