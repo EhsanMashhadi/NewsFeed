@@ -26,13 +26,13 @@ android {
         debug {
             buildConfigField "String", "API_BASE_URL", "\"https://newsapi.org/v2/\""
             buildConfigField "String", "API_KEY", "\"4f41f8d4da8a41fd83a60e72724afa3c\""
-            resValue "string", "app_version", "${defaultConfig.versionName}"
+            resValue "string", "app_version", "${defaultConfig.versionName} (${defaultConfig.versionCode})"
             applicationIdSuffix '.dev'
         }
         release {
             buildConfigField "String", "API_BASE_URL", "\"https://newsapi.org/v2/\""
             buildConfigField "String", "API_KEY", "\"4f41f8d4da8a41fd83a60e72724afa3c\""
-            resValue "string", "app_version", "${defaultConfig.versionName}"
+            resValue "string", "app_version", "${defaultConfig.versionName} (${defaultConfig.versionCode})"
             minifyEnabled true
             shrinkResources true
             debuggable false

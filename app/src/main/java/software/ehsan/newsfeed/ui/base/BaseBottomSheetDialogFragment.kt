@@ -2,15 +2,12 @@ package software.ehsan.newsfeed.ui.base
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import software.ehsan.newsfeed.ui.common.message.ErrorMessageSnackbar
 import software.ehsan.newsfeed.ui.common.message.InformativeMessageSnackbar
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 
-
-abstract class BaseFragment : Fragment(), Initializers {
-
-    val TAG = this.javaClass.simpleName.toString()
+abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment(), Initializers {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,4 +44,3 @@ abstract class BaseFragment : Fragment(), Initializers {
         }
     }
 }
-

@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
@@ -15,6 +14,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -23,10 +24,12 @@ import kotlinx.coroutines.launch
 import software.ehsan.newsfeed.R
 import software.ehsan.newsfeed.databinding.ActivityMainBinding
 import software.ehsan.newsfeed.ui.dashboard.ArticlesFragmentDirections
+import software.ehsan.newsfeed.ui.profile.ProfileFragment
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     lateinit var activityMainBinding: ActivityMainBinding
     lateinit var navController: NavController
@@ -118,5 +121,21 @@ class MainActivity : AppCompatActivity() {
 
     fun navigateToProfile() {
         findNavController(R.id.fragmentContainerView_mainActivity).navigate(R.id.action_global_profileFragment)
+    }
+
+    override fun onPreferenceStartFragment(
+        caller: PreferenceFragmentCompat,
+        pref: Preference
+    ): Boolean {
+        when (pref.key) {
+            ProfileFragment.PREFERENCE_ABOUT_APPLICATION_KEY -> {
+                findNavController(R.id.fragmentContainerView_mainActivity).navigate(
+                    R.id.action_global_aboutApplicationFragment,
+                    pref.extras
+                )
+            }
+        }
+
+        return true
     }
 }

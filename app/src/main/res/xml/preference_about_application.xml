@@ -1,0 +1,22 @@
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <Preference
+        app:key="version"
+        app:summary="@string/app_version"
+        app:title="Version" />
+
+    <Preference
+        app:key="firebase_id"
+        app:title="Firebase ID" />
+
+    <Preference app:title="Privacy Policy" />
+
+    <Preference app:title="Terms of Service" />
+
+    <Preference
+        app:key="send_feedback"
+        app:title="Send Feedback" />
+
+
+</androidx.preference.PreferenceScreen>

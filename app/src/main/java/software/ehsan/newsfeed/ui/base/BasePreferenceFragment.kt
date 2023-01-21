@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.preference.PreferenceFragmentCompat
 
-abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
+abstract class BasePreferenceFragment : PreferenceFragmentCompat(), Initializers {
 
-    abstract fun initUiComponents()
-    abstract fun subscribeLiveData()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
