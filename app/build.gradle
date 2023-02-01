@@ -152,6 +152,10 @@ dependencies {
     //Profiler
     implementation "androidx.profileinstaller:profileinstaller:1.3.0-alpha02"
 
+    //Messaging
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.1'
+
+
     //Leakcanary for detecting memory leaks
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 

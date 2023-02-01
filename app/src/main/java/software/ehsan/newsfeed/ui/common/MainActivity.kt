@@ -1,13 +1,18 @@
 package software.ehsan.newsfeed.ui.common
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -17,6 +22,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -28,22 +34,26 @@ import software.ehsan.newsfeed.ui.profile.ProfileFragment
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(),
-    PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     lateinit var activityMainBinding: ActivityMainBinding
     lateinit var navController: NavController
     lateinit var mainToolbar: MenuProvider
     private var isMainToolbarVisible = true
 
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (!isGranted) {
+            Logger.d("No permission")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         initSizeTheme()
-
         super.onCreate(savedInstanceState)
-
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView_mainActivity) as NavHostFragment
         navController = navHostFragment.navController
@@ -52,6 +62,7 @@ class MainActivity : AppCompatActivity(),
         activityMainBinding.toolbar.setupWithNavController(navController, appBarConfiguration)
         activityMainBinding.bottomNavigationMainActivity.setupWithNavController(navController)
         initMainToolbar()
+        checkNotificationPermission()
     }
 
     private fun initSizeTheme() {
@@ -137,5 +148,13 @@ class MainActivity : AppCompatActivity(),
         }
 
         return true
+    }
+
+    private fun checkNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
     }
 }
