@@ -9,7 +9,6 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import software.ehsan.newsfeed.R
-import software.ehsan.newsfeed.data.model.Status
 import software.ehsan.newsfeed.databinding.FragmentLoginBinding
 import software.ehsan.newsfeed.ui.base.BaseFragment
 import software.ehsan.newsfeed.ui.common.button.showLoading
@@ -122,12 +121,12 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun subscribeLoginByEmailPassword() {
-        viewModel.loginByEmailPasswordLiveData.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> showLoginLoading()
-                    Status.SUCCESS -> showLoginSuccess()
-                    Status.ERROR -> showLoginError(resource.exception)
+        viewModel.loginLiveData.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { event ->
+                when (event) {
+                    is LoginEvent.Loading  -> showLoginLoading()
+                    is LoginEvent.LoginSuccessfully -> showLoginSuccess()
+                    is LoginEvent.LoginFailed -> showLoginError(event.exception)
                 }
             }
         }

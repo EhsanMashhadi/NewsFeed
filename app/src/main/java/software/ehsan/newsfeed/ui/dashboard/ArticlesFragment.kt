@@ -14,10 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import software.ehsan.newsfeed.R
 import software.ehsan.newsfeed.data.exception.UnauthorizedAccessException
 import software.ehsan.newsfeed.data.model.Article
-import software.ehsan.newsfeed.data.model.Status
 import software.ehsan.newsfeed.databinding.FragmentArticlesBinding
 import software.ehsan.newsfeed.ui.common.BaseArticleFragment
-import software.ehsan.newsfeed.ui.common.SaveEvent
+import software.ehsan.newsfeed.ui.common.ArticleEvent
 import software.ehsan.newsfeed.ui.common.message.ActionMessageSnackbar
 import software.ehsan.newsfeed.ui.profile.ProfileFragment
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -181,23 +180,21 @@ class ArticlesFragment : BaseArticleFragment() {
     private fun subscribeSavedArticle() {
         articlesViewModel.saveArticleLiveData.observe(viewLifecycleOwner) { resource ->
             resource.getContentIfNotHandled()?.let {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        it.data?.let { saveEvent ->
-                            when (saveEvent) {
-                                is SaveEvent.SavedArticleSuccessfully -> {
-                                    showSuccessSaveMessage()
-                                    this.articlePagingAdapter.updateArticle(saveEvent.article)
-                                }
-                                is SaveEvent.UnSaveArticleSuccessfully -> {
-                                    showSuccessUnSaveMessage()
-                                    this.articlePagingAdapter.updateArticle(saveEvent.article)
-                                }
-                            }
-                        }
+                when (it) {
+                    is ArticleEvent.SavedArticleSuccessfully -> {
+                        showSuccessSaveMessage()
+                        this.articlePagingAdapter.updateArticle(it.article)
                     }
-                    Status.ERROR -> showError(it.exception)
-                    Status.LOADING -> {}
+                    is ArticleEvent.UnSaveArticleSuccessfully -> {
+                        showSuccessUnSaveMessage()
+                        this.articlePagingAdapter.updateArticle(it.article)
+                    }
+                    is ArticleEvent.SaveArticleError -> {
+                        showError(it.exception)
+                    }
+                    is ArticleEvent.UnSaveArticleError -> {
+                        showError(it.exception)
+                    }
                 }
             }
         }

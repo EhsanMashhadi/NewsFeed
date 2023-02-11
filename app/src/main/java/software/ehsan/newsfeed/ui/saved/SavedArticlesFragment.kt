@@ -11,7 +11,7 @@ import software.ehsan.newsfeed.data.model.Article
 import software.ehsan.newsfeed.data.model.Status
 import software.ehsan.newsfeed.databinding.FragmentArticleSavedBinding
 import software.ehsan.newsfeed.ui.common.BaseArticleFragment
-import software.ehsan.newsfeed.ui.common.SaveEvent
+import software.ehsan.newsfeed.ui.common.ArticleEvent
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.google.firebase.database.DatabaseException
 import com.orhanobut.logger.Logger
@@ -101,22 +101,20 @@ class SavedArticlesFragment : BaseArticleFragment() {
 
     private fun subscribeSavedArticle() {
         viewModel.saveArticleLiveData.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        resource.data?.let { saveEvent ->
-                            when (saveEvent) {
-                                is SaveEvent.SavedArticleSuccessfully -> {
-                                    showSuccessSaveMessage()
-                                }
-                                is SaveEvent.UnSaveArticleSuccessfully -> {
-                                    showSuccessUnSaveMessage()
-                                }
-                            }
-                        }
+            it.getContentIfNotHandled()?.let { event ->
+                when (event) {
+                    is ArticleEvent.SavedArticleSuccessfully -> {
+                        showSuccessSaveMessage()
                     }
-                    Status.ERROR -> showError(resource.exception)
-                    Status.LOADING -> {}
+                    is ArticleEvent.UnSaveArticleSuccessfully -> {
+                        showSuccessUnSaveMessage()
+                    }
+                    is ArticleEvent.SaveArticleError -> {
+                        showError(event.exception)
+                    }
+                    is ArticleEvent.UnSaveArticleError -> {
+                        showError(event.exception)
+                    }
                 }
             }
         }

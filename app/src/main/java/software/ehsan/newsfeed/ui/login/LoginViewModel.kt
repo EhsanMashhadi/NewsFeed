@@ -6,16 +6,16 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.orhanobut.logger.Logger
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
 import software.ehsan.newsfeed.data.model.Resource
 import software.ehsan.newsfeed.domain.profile.LoginByEmailPasswordUseCase
 import software.ehsan.newsfeed.domain.profile.LoginByGoogleUseCase
 import software.ehsan.newsfeed.ui.base.BaseViewModel
 import software.ehsan.newsfeed.util.Event
 import software.ehsan.newsfeed.util.Validator
-import com.orhanobut.logger.Logger
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,9 +24,8 @@ class LoginViewModel @Inject constructor(
     val loginByGoogleUseCase: LoginByGoogleUseCase
 ) : BaseViewModel() {
 
-    private val _loginByEmailPasswordLiveData = MutableLiveData<Event<Resource<Boolean>>>()
-    val loginByEmailPasswordLiveData: LiveData<Event<Resource<Boolean>>> =
-        _loginByEmailPasswordLiveData
+    private val _loginLiveData = MutableLiveData<Event<LoginEvent>>()
+    val loginLiveData: LiveData<Event<LoginEvent>> = _loginLiveData
 
     private val _emailValidationLiveData = MutableLiveData<Event<Resource<Boolean>>>()
     val emailValidationLiveData: LiveData<Event<Resource<Boolean>>> = _emailValidationLiveData
@@ -35,16 +34,16 @@ class LoginViewModel @Inject constructor(
     val loginValidationLiveData: LiveData<Event<Resource<Boolean>>> = _loginValidationLiveData
 
     fun loginByEmailPassword(email: String, password: String) {
-        _loginByEmailPasswordLiveData.value = Event(Resource.loading())
+        _loginLiveData.value = Event(LoginEvent.Loading)
         viewModelScope.launch {
             loginByEmailPasswordUseCase(email = email, password = password).collect {
                 if (it.isSuccessful) {
                     Logger.d(TAG, "Login by Email is Successful")
-                    _loginByEmailPasswordLiveData.value = Event(Resource.success(true))
+                    _loginLiveData.value = Event(LoginEvent.LoginSuccessfully)
                 } else {
                     Logger.d(TAG, "Login by Email is Failed")
                     Logger.d(TAG, it.exception!!.toString())
-                    _loginByEmailPasswordLiveData.value = Event(Resource.error(it.exception!!))
+                    _loginLiveData.value = Event(LoginEvent.LoginFailed(it.exception))
                 }
             }
         }
@@ -70,18 +69,24 @@ class LoginViewModel @Inject constructor(
     fun loginByGoogle(activityResult: ActivityResult) {
         viewModelScope.launch {
             loginByGoogleUseCase(activityResult = activityResult).catch {
-                _loginByEmailPasswordLiveData.value = Event(Resource.error(Exception(it)))
+                _loginLiveData.value = Event(LoginEvent.LoginFailed(Exception(it)))
             }.collect {
                 if (it.isSuccessful) {
                     val user = it.result.user
                     Logger.d(TAG, user?.toString())
-                    _loginByEmailPasswordLiveData.value = Event(Resource.success(true))
+                    _loginLiveData.value = Event(LoginEvent.LoginSuccessfully)
                 } else {
                     Logger.d(TAG, "Login by Google Failed")
-                    _loginByEmailPasswordLiveData.value = Event(Resource.error(it.exception))
+                    _loginLiveData.value = Event(LoginEvent.LoginFailed(it.exception))
                 }
             }
         }
 
     }
+}
+
+sealed class LoginEvent {
+    object Loading : LoginEvent()
+    object LoginSuccessfully : LoginEvent()
+    data class LoginFailed(val exception: java.lang.Exception?) : LoginEvent()
 }

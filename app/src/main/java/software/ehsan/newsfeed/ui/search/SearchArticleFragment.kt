@@ -10,29 +10,28 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import software.ehsan.newsfeed.R
-import software.ehsan.newsfeed.data.exception.UnauthorizedAccessException
-import software.ehsan.newsfeed.data.model.Article
-import software.ehsan.newsfeed.data.model.Status
-import software.ehsan.newsfeed.databinding.FragmentArticleSearchBinding
-import software.ehsan.newsfeed.ui.common.BaseArticleFragment
-import software.ehsan.newsfeed.ui.common.SaveEvent
-import software.ehsan.newsfeed.ui.common.message.ActionMessageSnackbar
-import software.ehsan.newsfeed.ui.dashboard.ArticleComparator
-import software.ehsan.newsfeed.ui.dashboard.ArticlePagingAdapter
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import software.ehsan.newsfeed.R
+import software.ehsan.newsfeed.data.exception.UnauthorizedAccessException
+import software.ehsan.newsfeed.data.model.Article
+import software.ehsan.newsfeed.databinding.FragmentArticleSearchBinding
+import software.ehsan.newsfeed.ui.common.BaseArticleFragment
+import software.ehsan.newsfeed.ui.common.ArticleEvent
+import software.ehsan.newsfeed.ui.common.message.ActionMessageSnackbar
+import software.ehsan.newsfeed.ui.dashboard.ArticleComparator
+import software.ehsan.newsfeed.ui.dashboard.ArticlePagingAdapter
 
 @AndroidEntryPoint
 class SearchArticleFragment : BaseArticleFragment() {
 
-    private var _binding: FragmentArticleSearchBinding?=null
+    private var _binding: FragmentArticleSearchBinding? = null
     private val binding get() = _binding!!
 
-    private var _searchArticleAdapter: ArticlePagingAdapter?=null
+    private var _searchArticleAdapter: ArticlePagingAdapter? = null
     private val searchArticleAdapter get() = _searchArticleAdapter!!
 
     private val viewModel: SearchArticlesViewModel by viewModels()
@@ -101,24 +100,22 @@ class SearchArticleFragment : BaseArticleFragment() {
 
     private fun subscribeSavedArticle() {
         viewModel.saveArticleLiveData.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        it.data?.let { saveEvent ->
-                            when (saveEvent) {
-                                is SaveEvent.SavedArticleSuccessfully -> {
-                                    showSuccessSaveMessage()
-                                    this.searchArticleAdapter.updateArticle(saveEvent.article)
-                                }
-                                is SaveEvent.UnSaveArticleSuccessfully -> {
-                                    showSuccessUnSaveMessage()
-                                    this.searchArticleAdapter.updateArticle(saveEvent.article)
-                                }
-                            }
-                        }
+            it.getContentIfNotHandled()?.let { event ->
+                when (event) {
+                    is ArticleEvent.SavedArticleSuccessfully -> {
+                        showSuccessSaveMessage()
+                        this.searchArticleAdapter.updateArticle(event.article)
                     }
-                    Status.ERROR -> showError(it.exception)
-                    else -> {}
+                    is ArticleEvent.UnSaveArticleSuccessfully -> {
+                        showSuccessUnSaveMessage()
+                        this.searchArticleAdapter.updateArticle(event.article)
+                    }
+                    is ArticleEvent.SaveArticleError -> {
+                        showError(event.exception)
+                    }
+                    is ArticleEvent.UnSaveArticleError -> {
+                        showError(event.exception)
+                    }
                 }
             }
         }
