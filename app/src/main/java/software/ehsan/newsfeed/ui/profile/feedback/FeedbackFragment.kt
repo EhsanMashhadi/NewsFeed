@@ -66,18 +66,17 @@ class FeedbackFragment : BaseBottomSheetDialogFragment() {
 
     private fun subscribeFeedback() {
         viewModel.feedbackLiveData.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
+            it.getContentIfNotHandled()?.let { event ->
+                when (event) {
+                    is FeedbackEvent.SendSuccessfully -> {
                         Logger.d("Feedback sent!")
                         showSuccessMessage(message = getString(R.string.feedbackFragment_success))
                         dismiss()
                     }
-                    Status.ERROR -> {
+                    is FeedbackEvent.SendFailed -> {
                         Logger.e("Feedback ERROR")
                         showFailedMessage(message = getString(R.string.feedbackFragment_failed))
                     }
-                    else -> {}
                 }
             }
         }

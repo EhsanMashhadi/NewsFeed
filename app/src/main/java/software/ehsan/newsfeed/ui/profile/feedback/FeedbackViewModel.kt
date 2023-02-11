@@ -22,8 +22,8 @@ class FeedbackViewModel @Inject constructor(
     val userAppPropertiesLiveData: LiveData<Resource<UserAppProperties>> =
         _userAppPropertiesLiveData
 
-    private val _feedbackLiveData = MutableLiveData<Event<Resource<Void>>>()
-    val feedbackLiveData: LiveData<Event<Resource<Void>>> = _feedbackLiveData
+    private val _feedbackLiveData = MutableLiveData<Event<FeedbackEvent>>()
+    val feedbackLiveData: LiveData<Event<FeedbackEvent>> = _feedbackLiveData
 
 
     fun getUserAppProperties() {
@@ -39,11 +39,15 @@ class FeedbackViewModel @Inject constructor(
             )
         ).addOnCompleteListener {
             if (it.isSuccessful) {
-                _feedbackLiveData.value = Event(Resource.success(null))
+                _feedbackLiveData.value = Event(FeedbackEvent.SendSuccessfully)
             } else {
-                _feedbackLiveData.value = Event(Resource.error(it.exception))
+                _feedbackLiveData.value = Event(FeedbackEvent.SendFailed(it.exception))
             }
         }
     }
+}
 
+sealed class FeedbackEvent{
+    object SendSuccessfully:FeedbackEvent()
+    data class SendFailed(val exception: java.lang.Exception?):FeedbackEvent()
 }

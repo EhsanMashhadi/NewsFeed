@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import software.ehsan.newsfeed.data.exception.UnauthorizedAccessException
 import software.ehsan.newsfeed.data.model.Article
-import software.ehsan.newsfeed.data.model.Resource
 import software.ehsan.newsfeed.domain.article.SaveArticleUseCase
 import software.ehsan.newsfeed.domain.article.UnSaveArticleUseCase
 import software.ehsan.newsfeed.domain.profile.GetCurrentUserUseCase
@@ -27,8 +26,8 @@ open class BaseArticleViewModel : BaseViewModel() {
     @Inject
     lateinit var getCurrentUserUseCase: GetCurrentUserUseCase
 
-    private val _saveArticleLiveData = MutableLiveData<Event<Resource<SaveEvent>>>()
-    val saveArticleLiveData: LiveData<Event<Resource<SaveEvent>>> = _saveArticleLiveData
+    private val _saveArticleLiveData = MutableLiveData<Event<ArticleEvent>>()
+    val saveArticleLiveData: LiveData<Event<ArticleEvent>> = _saveArticleLiveData
 
     fun saveOrUnSaveArticle(article: Article) {
         if (article.isSaved) {
@@ -41,7 +40,7 @@ open class BaseArticleViewModel : BaseViewModel() {
     private fun saveArticle(article: Article) {
         if (!getCurrentUserUseCase().isAuthenticated) {
             Logger.d("User is not authenticated!")
-            _saveArticleLiveData.value = Event(Resource.error(UnauthorizedAccessException()))
+            _saveArticleLiveData.value = Event(ArticleEvent.SaveArticleError(UnauthorizedAccessException()))
             return
         }
         viewModelScope.launch(Dispatchers.IO) {
@@ -50,11 +49,11 @@ open class BaseArticleViewModel : BaseViewModel() {
                 if (task.isSuccessful) {
                     article.isSaved = true
                     _saveArticleLiveData.value =
-                        Event(Resource.success(SaveEvent.SavedArticleSuccessfully(article)))
+                        Event(ArticleEvent.SavedArticleSuccessfully(article))
                     Logger.d("Save article successfully")
                 } else {
                     Logger.e("Save article failed %s", task.exception)
-                    _saveArticleLiveData.value = Event(Resource.error(task.exception))
+                    _saveArticleLiveData.value = Event(ArticleEvent.SaveArticleError(task.exception))
                 }
             }
         }
@@ -70,17 +69,20 @@ open class BaseArticleViewModel : BaseViewModel() {
                     article.isSaved = false
                     Logger.d("Unsave article successfully")
                     _saveArticleLiveData.value =
-                        Event(Resource.success(SaveEvent.UnSaveArticleSuccessfully(article)))
+                        Event(ArticleEvent.UnSaveArticleSuccessfully(article))
                 } else {
                     Logger.e("Unsave article failed %s", task.exception)
-                    _saveArticleLiveData.value = Event(Resource.error())
+                    _saveArticleLiveData.value = Event(ArticleEvent.UnSaveArticleError(task.exception))
                 }
             }
         }
     }
 }
 
-sealed class SaveEvent {
-    data class SavedArticleSuccessfully(val article: Article) : SaveEvent()
-    data class UnSaveArticleSuccessfully(val article: Article) : SaveEvent()
+sealed class ArticleEvent {
+    data class SavedArticleSuccessfully(val article: Article) : ArticleEvent()
+    data class UnSaveArticleSuccessfully(val article: Article) : ArticleEvent()
+    data class SaveArticleError(val exception: java.lang.Exception?) : ArticleEvent()
+    data class UnSaveArticleError(val exception: java.lang.Exception?) : ArticleEvent()
+
 }
