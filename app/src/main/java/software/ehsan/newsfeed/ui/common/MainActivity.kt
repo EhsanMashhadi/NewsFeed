@@ -10,6 +10,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
@@ -22,6 +23,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -36,10 +38,11 @@ import software.ehsan.newsfeed.ui.profile.ProfileFragment
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
-    lateinit var activityMainBinding: ActivityMainBinding
-    lateinit var navController: NavController
-    lateinit var mainToolbar: MenuProvider
+    private lateinit var activityMainBinding: ActivityMainBinding
+    private lateinit var navController: NavController
+    private lateinit var mainToolbar: MenuProvider
     private var isMainToolbarVisible = true
+    private val viewModel: MainViewModel by viewModels()
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -63,6 +66,19 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
         activityMainBinding.bottomNavigationMainActivity.setupWithNavController(navController)
         initMainToolbar()
         checkNotificationPermission()
+        observeLiveData()
+    }
+
+    private fun observeLiveData() {
+        viewModel.adLiveData.observe(this){event->
+            event.getContentIfNotHandled()?.let {
+                when(it){
+                    is MainEvent.ShowAds -> {
+                        it.interstitialAd.show(this)
+                    }
+                }
+            }
+        }
     }
 
     private fun initSizeTheme() {
@@ -132,6 +148,10 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
 
     fun navigateToProfile() {
         findNavController(R.id.fragmentContainerView_mainActivity).navigate(R.id.action_global_profileFragment)
+    }
+
+    fun showAds(){
+        viewModel.showAds()
     }
 
     override fun onPreferenceStartFragment(

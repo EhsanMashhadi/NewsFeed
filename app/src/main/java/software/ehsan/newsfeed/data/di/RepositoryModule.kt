@@ -6,11 +6,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import software.ehsan.newsfeed.data.repository.DeviceRepository
-import software.ehsan.newsfeed.data.repository.DeviceRepositoryImp
-import software.ehsan.newsfeed.data.repository.FeedbackRepository
-import software.ehsan.newsfeed.data.repository.FeedbackRepositoryImp
+import software.ehsan.newsfeed.data.repository.*
 import software.ehsan.newsfeed.data.source.database.firebase.FirebaseRealTimeDatabase
+import software.ehsan.newsfeed.data.source.shared_preference.SharedPreferenceInterface
 import javax.inject.Singleton
 
 @Module
@@ -27,5 +25,11 @@ class RepositoryModule {
     @Singleton
     fun provideFeedbackRepository(firebaseRealTimeDatabase: FirebaseRealTimeDatabase): FeedbackRepository {
         return FeedbackRepositoryImp(firebaseRealTimeDatabase)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAdsRepository(sharedPreferenceInterface: SharedPreferenceInterface): AdRepository{
+        return AdRepositoryImp(sharedPreference = sharedPreferenceInterface)
     }
 }
