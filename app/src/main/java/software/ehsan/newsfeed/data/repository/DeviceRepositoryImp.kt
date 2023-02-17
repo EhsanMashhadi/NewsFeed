@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 
-class DeviceRepositoryImp(val context: Context) : DeviceRepository {
+class DeviceRepositoryImp(val context: Context) : DeviceRepository, BaseRepository() {
 
     override fun getOsVersion(): String {
         val versionName = Build.VERSION.RELEASE
