@@ -1,8 +1,8 @@
 package software.ehsan.newsfeed.domain.article
 
+import com.google.android.gms.tasks.Task
 import software.ehsan.newsfeed.data.model.Article
 import software.ehsan.newsfeed.data.repository.ArticleRepository
-import com.google.android.gms.tasks.Task
 import javax.inject.Inject
 
 class UnSaveArticleUseCase @Inject constructor(private val articleRepository: ArticleRepository) {

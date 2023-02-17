@@ -8,6 +8,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import software.ehsan.newsfeed.data.repository.*
 import software.ehsan.newsfeed.data.source.database.firebase.FirebaseRealTimeDatabase
+import software.ehsan.newsfeed.data.source.remote.LoginManager
+import software.ehsan.newsfeed.data.source.remote.RetrofitService
 import software.ehsan.newsfeed.data.source.shared_preference.SharedPreferenceInterface
 import javax.inject.Singleton
 
@@ -29,7 +31,28 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideAdsRepository(sharedPreferenceInterface: SharedPreferenceInterface): AdRepository{
+    fun provideAdsRepository(sharedPreferenceInterface: SharedPreferenceInterface): AdRepository {
         return AdRepositoryImp(sharedPreference = sharedPreferenceInterface)
+    }
+
+    @Provides
+    @Singleton
+    fun provideArticleRepository(database: FirebaseRealTimeDatabase): ArticleRepository {
+        return ArticleRepositoryImp(database = database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsRepository(
+        retrofitService: RetrofitService,
+        database: FirebaseRealTimeDatabase
+    ): NewsRepository {
+        return NewsRepositoryImp(retrofitService = retrofitService, database = database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(loginManager: LoginManager): UserRepository {
+        return UserRepositoryImp(loginManager = loginManager)
     }
 }
