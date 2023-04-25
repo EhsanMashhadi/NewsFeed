@@ -1,6 +1,5 @@
 package software.ehsan.newsfeed.domain.profile
 
-import software.ehsan.newsfeed.data.repository.UserRepositoryImp
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.flow.Flow

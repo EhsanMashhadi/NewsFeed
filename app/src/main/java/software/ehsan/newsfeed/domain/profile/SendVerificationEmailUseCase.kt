@@ -8,6 +8,6 @@ import javax.inject.Inject
 class SendVerificationEmailUseCase @Inject constructor(private val userRepository: UserRepository) {
 
     suspend operator fun invoke(firebaseUser: FirebaseUser): Task<Void> {
-        return userRepository.sendEmailVerification1(firebaseUser = firebaseUser)
+        return userRepository.sendEmailVerification(firebaseUser = firebaseUser)
     }
 }

@@ -14,7 +14,6 @@ interface UserRepository {
     suspend fun loginByGoogle(result: ActivityResult): Flow<Task<AuthResult>>
     fun getCurrentUser(): User
     suspend fun signUpWithEmailPassword(email: String, password: String): Flow<Task<AuthResult>>
-    suspend fun sendEmailVerification(firebaseUser: FirebaseUser): Flow<Task<Void>>
-    suspend fun sendEmailVerification1(firebaseUser: FirebaseUser): Task<Void>
+    suspend fun sendEmailVerification(firebaseUser: FirebaseUser): Task<Void>
     fun logOut()
 }

@@ -45,11 +45,8 @@ class UserRepositoryImp @Inject constructor(var loginManager: LoginManager) : Us
         return loginManager.signUpWithEmailPassword(email = email, password = password)
     }
 
-    override suspend fun sendEmailVerification(firebaseUser: FirebaseUser): Flow<Task<Void>> {
-        return loginManager.sendEmailVerification(firebaseUser)
-    }
 
-    override suspend fun sendEmailVerification1(firebaseUser: FirebaseUser): Task<Void> {
+    override suspend fun sendEmailVerification(firebaseUser: FirebaseUser): Task<Void> {
         return loginManager.sendEmailVerification1(firebaseUser)
     }
 

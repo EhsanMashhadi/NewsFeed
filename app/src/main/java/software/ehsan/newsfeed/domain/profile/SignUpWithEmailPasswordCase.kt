@@ -17,8 +17,8 @@ class SignUpWithEmailPasswordCase @Inject constructor(
         return userRepository.signUpWithEmailPassword(email = email, password = password)
             .map { task ->
                 if (task.isSuccessful) {
-                    val x = sendVerificationEmailUseCase(task.result.user!!)
-                    Logger.d(x)
+                    val task = sendVerificationEmailUseCase(task.result.user!!)
+                    Logger.d(task)
                 }
                 task
             }

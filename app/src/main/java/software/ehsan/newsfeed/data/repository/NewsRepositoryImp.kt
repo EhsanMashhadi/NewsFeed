@@ -20,8 +20,8 @@ class NewsRepositoryImp @Inject constructor(
         val flow = Pager(PagingConfig(pageSize = PAGE_SIZE)) {
             SearchedNewsPagingSource(retrofitService, keyword = keyword)
         }.flow.map {
-            it.map {
-                val newsWithSavedState = checkSavedArticlesPaging(article = it, userId = userId)
+            it.map { article ->
+                val newsWithSavedState = checkSavedArticlesPaging(article = article, userId = userId)
                 newsWithSavedState
             }
         }

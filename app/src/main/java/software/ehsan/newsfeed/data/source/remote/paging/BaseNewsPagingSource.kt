@@ -24,7 +24,6 @@ abstract class BaseNewsPagingSource : PagingSource<Int, Article>() {
 
     private fun getNextKey(currentPageNumber: Int, loadSize: Int): Int {
         return currentPageNumber + 1
-//        return nextPageNumber + (loadSize / PAGE_SIZE)
     }
 
     protected fun loadResult(

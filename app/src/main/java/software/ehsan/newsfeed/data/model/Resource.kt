@@ -21,6 +21,8 @@ data class Resource<out T>(val status: Status, val data: T?, val exception: Exce
     }
 }
 
-enum class Status {
-    SUCCESS, ERROR, LOADING
+sealed class Status {
+    object SUCCESS:Status()
+    object ERROR:Status()
+    object LOADING:Status()
 }
