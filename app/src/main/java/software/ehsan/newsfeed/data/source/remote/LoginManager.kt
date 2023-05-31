@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.ActivityResult
-import software.ehsan.newsfeed.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -19,7 +18,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.withContext
+import software.ehsan.newsfeed.R
 import javax.inject.Inject
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class LoginManager @Inject constructor(
     @ApplicationContext private val context: Context, private val dispatcher: CoroutineDispatcher
@@ -82,4 +84,22 @@ class LoginManager @Inject constructor(
         }
     }
 
+    suspend fun sendEmailVerification(user: FirebaseUser) = withContext(dispatcher) {
+        callbackFlow<Task<Void>> {
+            user.let {
+                it.sendEmailVerification().addOnCompleteListener {
+                    trySend(it)
+                }
+                awaitClose()
+            }
+        }
+    }
+
+    suspend fun sendEmailVerification1(user: FirebaseUser) = suspendCoroutine<Task<Void>> { cont ->
+        user.let {
+            it.sendEmailVerification().addOnCompleteListener {
+                cont.resume(it)
+            }
+        }
+    }
 }

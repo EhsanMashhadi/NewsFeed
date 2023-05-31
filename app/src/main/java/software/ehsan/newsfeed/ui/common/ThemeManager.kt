@@ -29,14 +29,14 @@ class ThemeManager {
             when (theme) {
                 "Day" -> mode = AppCompatDelegate.MODE_NIGHT_NO
                 "Night" -> mode = AppCompatDelegate.MODE_NIGHT_YES
-                "System Mode" -> mode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                "Automatic (Follow device theme)" -> mode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             }
             AppCompatDelegate.setDefaultNightMode(mode)
         }
 
         fun initTheme(context: Context) {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-            val theme = sharedPreferences.getString("theme", "System Mode")
+            val theme = sharedPreferences.getString("theme", "Automatic (Follow device theme)")
             setTheme(theme = theme!!)
         }
     }

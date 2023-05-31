@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import software.ehsan.newsfeed.data.model.Resource
-import software.ehsan.newsfeed.domain.profile.SignUpUseWithEmailPasswordCase
+import software.ehsan.newsfeed.domain.profile.SignUpWithEmailPasswordCase
 import software.ehsan.newsfeed.ui.base.BaseViewModel
 import software.ehsan.newsfeed.util.Validator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(val signUpUseWithEmailPasswordCase: SignUpUseWithEmailPasswordCase) :
+class SignUpViewModel @Inject constructor(val signUpUseWithEmailPasswordCase: SignUpWithEmailPasswordCase) :
     BaseViewModel() {
 
     var email by mutableStateOf("")
@@ -50,7 +50,7 @@ class SignUpViewModel @Inject constructor(val signUpUseWithEmailPasswordCase: Si
                 } else {
                     Log.d(TAG, "FALSE")
                     _signUpWithEmailPasswordLiveData.value =
-                        Resource.error(RuntimeException("Failed"))
+                        Resource.error(it.exception)
                 }
             }
         }

@@ -8,11 +8,9 @@ import software.ehsan.newsfeed.ui.common.message.InformativeMessageSnackbar
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment(), Initializers {
 
     val TAG = this.javaClass.simpleName.toString()
-    abstract fun initUiComponents()
-    abstract fun subscribeLiveData()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

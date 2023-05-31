@@ -64,4 +64,17 @@
         android:name="software.ehsan.newsfeed.ui.signup.SignupFragment"
         tools:layout="@layout/fragment_signup"
         android:label="Signup" />
+    <fragment
+        android:id="@+id/aboutApplicationFragment"
+        android:name="software.ehsan.newsfeed.ui.profile.AboutApplicationFragment"
+        android:label="AboutApplicationFragment" >
+        <action
+            android:id="@+id/action_aboutApplicationFragment_to_sendFeedbackFragment"
+            app:destination="@id/sendFeedbackFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_aboutApplicationFragment" app:destination="@id/aboutApplicationFragment" />
+    <dialog
+        android:id="@+id/sendFeedbackFragment"
+        android:name="software.ehsan.newsfeed.ui.profile.feedback.FeedbackFragment"
+        android:label="SendFeedbackFragment" />
 </navigation>

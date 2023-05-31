@@ -30,7 +30,7 @@
             app:entries="@array/theme"
             app:entryValues="@array/theme"
             app:icon="@drawable/ic_theme"
-            app:defaultValue="Night"
+            app:defaultValue="Automatic (Follow device theme)"
             app:key="theme"
             app:title="Theme" />
 
@@ -51,10 +51,11 @@
 
         <Preference
             app:icon="@drawable/ic_version"
-            app:key="version"
-            app:selectable="false"
-            app:summary="@string/app_version"
-            app:title="Version" />
+            app:selectable="true"
+            app:key="about_application"
+            app:title="About the application"
+            app:fragment="software.ehsan.newsfeed.ui.profile.AboutApplicationFragment"
+             />
 
     </PreferenceCategory>
 

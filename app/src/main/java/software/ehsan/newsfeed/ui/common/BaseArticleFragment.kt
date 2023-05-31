@@ -28,6 +28,7 @@ open class BaseArticleFragment : BaseFragment() {
     }
 
     open fun showFullArticle(url: String) {
+        (activity as MainActivity).showAds()
         val builder = CustomTabsIntent.Builder()
         val customTabsIntent = builder.build()
         customTabsIntent.launchUrl(requireContext(), Uri.parse(url))

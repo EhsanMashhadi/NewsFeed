@@ -27,6 +27,7 @@
     <string name="profileFragment_logOut">Log Out</string>
     <string name="profileFragment_logOutMessage">Are you sure?You can\'t save news until you log in again.</string>
     <string name="profileFragment_loginRegister">Login/Register</string>
+    <string name="profileFragment_notVerified">Not verified, please check you email.</string>
 
     <!-- LOGIN -->
     <string name="loginFragment_login">Login</string>
@@ -37,6 +38,7 @@
 
     <!-- SIGN UP -->
     <string name="singUpFragment_signUp">Sing Up</string>
+    <string name="signUpFragment_duplicateAccount">There is an account with this email already</string>
     <string name="singUpFragment_failedMessage">Failed to create an account</string>
     <string name="singUpFragment_successMessage">Account created successfully</string>
 
@@ -54,6 +56,8 @@
     <string name="all_internetError">No Internet connection!</string>
     <string name="all_rateLimitError">Rate limit error</string>
     <string name="all_shouldLogin">You should login to see the saved list</string>
+    <string name="all_empty"></string>
+    <string name="all_na">N/A</string>
 
 
     <!-- SETTINGS -->
@@ -67,7 +71,7 @@
     <string-array name="theme">
         <item>Day</item>
         <item>Night</item>
-        <item>System Mode</item>
+        <item>Automatic (Follow device theme)</item>
     </string-array>
 
     <string-array name="country">
@@ -183,5 +187,15 @@
         <item>us</item>
         <item>ve</item>
     </string-array>
+
+    <string name="feedbackFragment_userProperties">Android Version: %1$s\nApp Version: %2$s\nLogin Info: %3$s</string>
+    <string name="feedbackFragment_emailHelper">Our team will contact this email to help you</string>
+    <string name="feedbackFragment_feedbackHint">Your feedback or problem</string>
+    <string name="feedbackFragment_feedbackHelper">Please provide detailed information if possible</string>
+    <string name="feedbackFragment_send">Send</string>
+    <string name="feedbackFragment_success">Feedback sent successfully</string>
+    <string name="feedbackFragment_failed">Failed to send feedback, please try again</string>
+
+
 
 </resources>

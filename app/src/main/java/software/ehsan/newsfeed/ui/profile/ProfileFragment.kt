@@ -26,6 +26,7 @@ class ProfileFragment : BasePreferenceFragment() {
         const val PREFERENCE_FONT_SIZE_KEY = "font_size"
         const val PREFERENCE_THEME_KEY = "theme"
         const val PREFERENCE_COUNTRY_KEY = "country"
+        const val PREFERENCE_ABOUT_APPLICATION_KEY = "about_application"
     }
 
     private val viewModel: ProfileViewModel by viewModels()
@@ -141,12 +142,19 @@ class ProfileFragment : BasePreferenceFragment() {
     }
 
     private fun showUserInformationView(user: User) {
-        loginRegisterPreference.title = user.email
+        loginRegisterPreference.title = user.email ?: getString(R.string.all_na)
+        if(!user.isEmailVerified){
+            loginRegisterPreference.summary = getString(R.string.profileFragment_notVerified)
+        }
+        else{
+            loginRegisterPreference.summary = getString(R.string.all_empty)
+        }
         loginRegisterPreference.isEnabled = false
     }
 
     private fun showLoginView() {
         loginRegisterPreference.title = getString(R.string.profileFragment_loginRegister)
+        loginRegisterPreference.summary = getString(R.string.all_empty)
         loginRegisterPreference.isEnabled = true
     }
 
