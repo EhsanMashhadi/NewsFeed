@@ -124,16 +124,16 @@ class SavedArticlesFragment : BaseArticleFragment() {
         viewModel.savedArticlesLiveData.observe(viewLifecycleOwner) {
             Logger.d(it)
             when (it.status) {
-                Status.SUCCESS -> {
+                Status.Success -> {
                     hideShimmer()
                     showRecyclerView()
                     showSavedNews(it.data)
                 }
-                Status.ERROR -> {
+                Status.Error -> {
                     hideShimmer()
                     showError(it.exception)
                 }
-                Status.LOADING -> {
+                Status.Loading -> {
                     hideRecyclerView()
                     showShimmer()
                 }

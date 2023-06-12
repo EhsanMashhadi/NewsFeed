@@ -52,7 +52,7 @@ class FeedbackFragment : BaseBottomSheetDialogFragment() {
     private fun subscribeUserAppProperties() {
         viewModel.userAppPropertiesLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
-                Status.SUCCESS -> binding.textViewSendFeedbackFragmentUserAppProperties.text =
+                Status.Success -> binding.textViewSendFeedbackFragmentUserAppProperties.text =
                     getString(
                         R.string.feedbackFragment_userProperties,
                         it.data!!.osVersion,

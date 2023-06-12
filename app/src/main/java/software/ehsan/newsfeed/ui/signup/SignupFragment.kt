@@ -168,7 +168,7 @@ class SignupFragment : BaseFragment() {
         ) {
             Box(contentAlignment = androidx.compose.ui.Alignment.Companion.CenterStart) {
                 viewModel.signUpWithEmailPasswordLiveData.observeAsState().value?.let {
-                    if (it.status == Status.LOADING) {
+                    if (it.status == Status.Loading) {
                         CircularProgressIndicator(
                             color = androidx.compose.ui.graphics.Color.White,
                             modifier = Modifier
@@ -196,12 +196,12 @@ class SignupFragment : BaseFragment() {
     override fun subscribeLiveData() {
         viewModel.signUpWithEmailPasswordLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
-                Status.SUCCESS -> {
+                Status.Success -> {
                     showSuccessMessage(message = getString(R.string.singUpFragment_successMessage))
                     navigateToProfileFragment()
                 }
-                Status.ERROR -> showError(it.exception)
-                Status.LOADING -> kotlin.run {
+                Status.Error -> showError(it.exception)
+                Status.Loading -> kotlin.run {
                     return@run
                 }
             }

@@ -108,9 +108,9 @@ class ProfileFragment : BasePreferenceFragment() {
     private fun subscribeUserLiveData() {
         viewModel.userLiveData.observe(viewLifecycleOwner) {
             when (it.status) {
-                Status.SUCCESS -> showUserInformation(it.data)
-                Status.ERROR -> showUserInformation(null)
-                Status.LOADING -> showLoading()
+                Status.Success -> showUserInformation(it.data)
+                Status.Error -> showUserInformation(null)
+                Status.Loading -> showLoading()
             }
         }
     }
